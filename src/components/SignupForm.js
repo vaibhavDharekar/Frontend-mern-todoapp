@@ -1,10 +1,12 @@
 import React,{useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const SignupForm = () => {
     let [email,setEmail] = useState('')
     let [password,setPassword] = useState('')
     let [firstName,setFirstName] = useState('')
-    let [lastName,setLastName] = useState('') 
+    let [lastName,setLastName] = useState('')
+    let navigate = useNavigate(); 
   return (
     <div>
         <form action="">
@@ -36,10 +38,10 @@ const SignupForm = () => {
                     
                     if(response.status === 201){
                         
-                        console.log(data.msg);
+                        navigate('/signin');
                     }
                     else{
-                        console.log(data.error);
+                        navigate('/signup')
                     }
                 }
                 else{
