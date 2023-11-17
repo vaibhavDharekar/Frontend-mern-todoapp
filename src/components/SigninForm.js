@@ -1,8 +1,10 @@
 import React,{useState} from 'react'
+import { Link,useNavigate } from 'react-router-dom';
 
 const SigninForm = () => {
     let [email,setEmail] = useState('')
     let [password,setPassword] = useState('')
+    let navigate = useNavigate();
   return (
     <div>
         <form action="">
@@ -20,23 +22,26 @@ const SigninForm = () => {
                     setEmail('');
                     setPassword('');
                     let response = await fetch('http://localhost:8080/signin',{method:'post',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
-                    let user = await response.json();
-                    
+                    let user = await response.json();                    
                     if(response.status === 201){
                         localStorage.setItem('jwt',user.token);
                         localStorage.setItem('email',user.email);
                         localStorage.setItem('firstName',user.firstName);
                         console.log('signed in',user.firstName)
+                        navigate('/todoapp');
                     }
                     else{
                         console.log(user.error);
+                        if(user.errorCode == 1)
+                        navigate('/signup')
+                        else if(user.errorCode == 2)
+                        navigate('/singin')
+
                     }
                 }
                 else{
                     console.log("All fields are mandetory")
                 }
-
-
             }}>Sign In</button>
         </form>
     </div>
