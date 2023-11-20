@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const TaskInputForm = () => {
+const TaskInputForm = ({setTasks,setTaskAdded,taskAdded}) => {
     let[task,setTask] = useState('');
   return (
     <div>
@@ -18,6 +18,8 @@ const TaskInputForm = () => {
           let data = await response.json();
           if(response.status == 201){
             console.log(data.msg);
+            let flag = taskAdded;
+            setTaskAdded(flag + 1);
           }
           else{
             console.log(data.error)
