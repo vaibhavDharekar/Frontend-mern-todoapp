@@ -6,12 +6,12 @@ import ShowTasks from './ShowTasks'
 const TodoApp = () => {
   let [tasks,setTasks] = useState([]);
   let [taskAdded,setTaskAdded] = useState(0);
+
   return (
     <div className='w-2/3 mx-auto'>
         <Heading/>
         <TaskInputForm setTasks={setTasks} setTaskAdded={setTaskAdded} taskAdded={taskAdded}/>
-        <ShowTasks tasks={tasks} setTasks={setTasks} taskAdded={taskAdded}/>
-
+        <ShowTasks tasks={tasks} setTasks={setTasks} taskAdded={taskAdded} />
     </div>
   )
 }
