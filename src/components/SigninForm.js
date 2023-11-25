@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Link,useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 
 const SigninForm = () => {
     let [email,setEmail] = useState('')
@@ -33,9 +33,13 @@ const SigninForm = () => {
                     else{
                         console.log(user.error);
                         if(user.errorCode == 1)
-                        navigate('/signup')
+                        {
+                            navigate('/signup')
+                        }
                         else if(user.errorCode == 2)
-                        navigate('/singin')
+                        {
+                            navigate('/singin')
+                        }
 
                     }
                 }
