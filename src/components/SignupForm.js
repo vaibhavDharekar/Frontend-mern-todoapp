@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import validateForm from '../utils/validateForm';
+import { BackendURL } from '../utils/backendURL';
 
 const SignupForm = () => {
     let [email,setEmail] = useState('')
@@ -49,13 +50,15 @@ const SignupForm = () => {
             <button className='bg-orange-500 p-1 rounded-lg' onClick={async(e)=>{
                 
                 e.preventDefault();
-                setIsSubmit(1);
                 let response;
-                let validated = validate();
+                console.log(email,password,firstName,lastName)
                 let msg = validateForm(email,password,firstName,lastName);
+                console.log(msg);
                 if(!msg){
-                    response = await fetch('http://localhost:8080/signup',{method:'post',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password,firstName,lastName})});
+                    response = await fetch(`${BackendURL}/signup`,{method:'post',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password,firstName,lastName})});
+                    console.log("response is",response)
                     let data = await response.json();
+                    console.log("data is",data)
                     setEmail('');
                     setPassword('');
                     setFirstName('');

@@ -19,8 +19,8 @@ const validateForm = (email,password,firstName,lastName)=>{
         if(!validateEmail(email))
         return "Invalid email format"
         vals.forEach((val,idx)=>{
-            if(val.length > 20)
-            msg = `${strVals[idx]} must be less than 20 characters`;
+            if(val.length > 30)
+            msg = `${strVals[idx]} must be less than 30 characters`;
         })
         return msg;
     }

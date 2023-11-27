@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import {useNavigate } from 'react-router-dom';
+import { BackendURL } from '../utils/backendURL';
 
 const SigninForm = () => {
     let [email,setEmail] = useState('')
@@ -21,7 +22,7 @@ const SigninForm = () => {
                 if(email && password){
                     setEmail('');
                     setPassword('');
-                    let response = await fetch('http://localhost:8080/signin',{method:'post',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
+                    let response = await fetch(`${BackendURL}/signin`,{method:'post',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
                     let user = await response.json();                    
                     if(response.status === 201){
                         localStorage.setItem('jwt',user.token);

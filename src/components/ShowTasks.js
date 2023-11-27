@@ -2,10 +2,11 @@ import React, { useEffect,useState } from 'react'
 import ShowAllTasks from './ShowAllTasks';
 import ShowPendingTasks from './ShowPendingTasks';
 import ShowDoneTasks from './ShowDoneTasks';
+import { BackendURL } from '../utils/backendURL';
 
 const ShowTasks = ({tasks,setTasks,taskAdded,setTaskAdded}) => {
     let getTasks = async()=>{
-        let response = await fetch('http://localhost:8080/showTasks',{method:"get",headers:{"Content-Type":"application/json","Authorization":"Bearer "+localStorage.getItem("jwt")},body:JSON.stringify()});
+        let response = await fetch(`${BackendURL}/showTasks`,{method:"get",headers:{"Content-Type":"application/json","Authorization":"Bearer "+localStorage.getItem("jwt")},body:JSON.stringify()});
         let tasks = await response.json();
         setTasks(tasks.allTasks);
     }
@@ -14,17 +15,17 @@ const ShowTasks = ({tasks,setTasks,taskAdded,setTaskAdded}) => {
         getTasks();
     },[taskAdded]);
     let taskDone = async(taskId)=>{
-        let response = await fetch(`http://localhost:8080/taskDone/${taskId}`,{method:"get",headers:{"Content-Type":"application/json","Authorization":"Bearer "+localStorage.getItem("jwt")},body:JSON.stringify()});
+        let response = await fetch(`${BackendURL}/taskDone/${taskId}`,{method:"get",headers:{"Content-Type":"application/json","Authorization":"Bearer "+localStorage.getItem("jwt")},body:JSON.stringify()});
         let data = await response.json();
         setTasks(data.allTasks);
     }
     let taskEdit = async(taskId)=>{
-        let response = await fetch(`http://localhost:8080/taskEdit/${taskId}`,{method:"get",headers:{"Content-Type":"application/json","Authorization":"Bearer "+localStorage.getItem("jwt")},body:JSON.stringify()});
+        let response = await fetch(`${BackendURL}/taskEdit/${taskId}`,{method:"get",headers:{"Content-Type":"application/json","Authorization":"Bearer "+localStorage.getItem("jwt")},body:JSON.stringify()});
         let data = await response.json();
         setTasks(data.allTasks);
     }
     let taskDelete = async(taskId)=>{
-        let response = await fetch(`http://localhost:8080/taskDelete/${taskId}`,{method:"get",headers:{"Content-Type":"application/json","Authorization":"Bearer "+localStorage.getItem("jwt")},body:JSON.stringify()});
+        let response = await fetch(`${BackendURL}/taskDelete/${taskId}`,{method:"get",headers:{"Content-Type":"application/json","Authorization":"Bearer "+localStorage.getItem("jwt")},body:JSON.stringify()});
         let data = await response.json();
         setTasks(data.allTasks);
     }

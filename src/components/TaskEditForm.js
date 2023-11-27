@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { BackendURL } from '../utils/backendURL';
 
 const TaskEditForm = ({setTasks,setTaskAdded,taskAdded,taskTitle,taskId}) => {
     let[task,setTask] = useState(taskTitle);
@@ -10,7 +11,7 @@ const TaskEditForm = ({setTasks,setTaskAdded,taskAdded,taskTitle,taskId}) => {
         <button className='w-1/12 bg-gray-200 h-10' onClick={async()=>{
           if(task){
             try{
-          let response = await fetch(`http://localhost:8080/taskEdit/${taskId}`,{method:'post',headers: {
+          let response = await fetch(`${BackendURL}/taskEdit/${taskId}`,{method:'post',headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer "+localStorage.getItem('jwt')
           },body:JSON.stringify({task:task})})

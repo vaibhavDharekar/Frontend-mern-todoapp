@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { BackendURL } from '../utils/backendURL';
 
 const TaskInputForm = ({setTasks,setTaskAdded,taskAdded}) => {
     let[task,setTask] = useState('');
@@ -10,7 +11,7 @@ const TaskInputForm = ({setTasks,setTaskAdded,taskAdded}) => {
         <button className='w-1/12 bg-teal-400 h-10' onClick={async()=>{
           if(task){
             try{
-          let response = await fetch('http://localhost:8080/addTask',{method:'post',headers: {
+          let response = await fetch(`${BackendURL}/addTask`,{method:'post',headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer "+localStorage.getItem('jwt')
           },body:JSON.stringify({task:task})})
